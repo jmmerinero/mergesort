@@ -1,31 +1,27 @@
 class Array
 
-  def merge(left, right)
+  def merge(left, right, &block)
     result = []
 
     while(!left.empty? and !right.empty?) do
-      (left.first < right.first) ? result << left.shift : result << right.shift
+      comp = (block_given? ? block.call(left.first, right.first) : left.first <=> right.first)
+      (comp < 0) ? result << left.shift : result << right.shift
     end
 
     return result +left + right
   end
 
-  def mergesort_split
+  def mergesort(&block)
     if(self.size <= 1)
       return self
     end
 
     left = self[0...-(self.size/2)]
-    left = left.mergesort
+    left = left.mergesort(&block)
     right = self[-(self.size/2)..-1]
-    right = right.mergesort
+    right = right.mergesort(&block)
     
-    return merge(left, right)
-  end
-
-  def mergesort
-    ordered_ary = self.mergesort_split
-    self.replace(ordered_ary)
+    self.replace(merge(left, right, &block))
   end
 
 end
