@@ -25,18 +25,25 @@ RSpec.describe 'This is a mergesort implementation written in Ruby.' do
     end
 
     it 'overrides the Array object over which it is applied' do
-      ary = Array.new()
+      ary = [4, 3, 2, 1]
       expect(ary.mergesort).to be(ary)
     end
     
     it 'orders Array objects filled with an even number of Fixnum objects' do
       ary = [4, 3, 2, 1]
-      expect(ary.mergesort).to eql([1, 2, 3, 4])                                                      end
+      expect(ary.mergesort).to eql([1, 2, 3, 4])
+    end
     
     it 'orders Array objects filled with an odd number of Fixnum objects' do
       ary = [5, 4, 3, 2, 1]
       expect(ary.mergesort).to eql([1, 2, 3, 4, 5])
     end
+
+    it 'orders Array objects filled with String objects' do
+      ary = ['d', 'c', 'b', 'a']
+      expect(ary.mergesort).to eql(['a', 'b', 'c', 'd'])
+    end
+
   end
 end
 

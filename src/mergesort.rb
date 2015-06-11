@@ -1,31 +1,31 @@
 class Array
-  def mergesort
-    #self = mergesort_split(self)
-    #self
 
-    self.sort!
-  end
-
-  def self.mergesort_split(ary)
-    if(ary.size == 1)
-      return ary
-    end
-
-    left = mergesort_split(ary[0, -(ary.size/2)])
-    right = mergesort_split(ary[-1, -(ary.size/2)])
-    
-    ary = merge(left, right)
-
-    return ary
-  end
-
-  def self.merge(left, right)
+  def merge(left, right)
     result = []
 
-    while(!left.empty? and !rigth.empty?) do
+    while(!left.empty? and !right.empty?) do
       (left.first < right.first) ? result << left.shift : result << right.shift
     end
 
-    return result
+    return result +left + right
   end
+
+  def mergesort_split
+    if(self.size <= 1)
+      return self
+    end
+
+    left = self[0...-(self.size/2)]
+    left = left.mergesort
+    right = self[-(self.size/2)..-1]
+    right = right.mergesort
+    
+    return merge(left, right)
+  end
+
+  def mergesort
+    ordered_ary = self.mergesort_split
+    self.replace(ordered_ary)
+  end
+
 end
