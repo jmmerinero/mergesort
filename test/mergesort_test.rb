@@ -1,5 +1,7 @@
-require 'rspec'
-require_relative '../src/mergesort'
+require_relative 'spec_helper'
+
+#require 'rspec'
+#require_relative '../src/mergesort'
 
 RSpec.describe 'This is a mergesort implementation written in Ruby.' do
   before(:all) do
