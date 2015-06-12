@@ -1,13 +1,10 @@
 require_relative './test_helper'
 
-#require 'rspec'
-#require_relative '../src/mergesort'
-
 RSpec.describe 'This is a mergesort implementation written in Ruby.' do
   before(:all) do
   end
 
-  context 'The method .mergesort works over Array objects' do
+  context 'The method .mergesort' do
     it 'is answered when it is called over Array Objects' do
       expect([].respond_to?(:mergesort)).to be true
     end
@@ -49,6 +46,11 @@ RSpec.describe 'This is a mergesort implementation written in Ruby.' do
     it 'orders from bigger to smaller Array objects filled with String objects' do
       ary = %w(a b c d)
       expect(ary.mergesort { |a, b| -(a <=> b) }).to eql(%w(d c b a))
+    end
+
+    it "raises an Exception object when can't do the merge" do
+      ary = [2, 3, 1, 9, nil]
+      expect { (ary.mergesort) }.to raise_error(ArgumentError)
     end
   end
 end
