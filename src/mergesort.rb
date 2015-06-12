@@ -20,21 +20,28 @@ class Array
     left.mergesort(&block)
     right.mergesort(&block)
 
-    replace(merge(left, right, &block))
+    begin
+      replace(merge(left, right, &block))
+    rescue
+      raise ArgumentError
+    end
   end
 
   def merge(left, right, &block)
     result = []
     block = ->(a, b) { a <=> b } unless block_given?
 
-    while !(left.empty?) && !(right.empty?)
-      if (block.call(left.first, right.first) <= 0)
-        result << left.shift # .shift is destructive, .first isn't
-      else
-        result << right.shift
+    begin
+      while !(left.empty?) && !(right.empty?)
+        if (block.call(left.first, right.first) <= 0)
+          result << left.shift # .shift is destructive, .first isn't
+        else
+          result << right.shift
+        end
       end
+    rescue
+      raise
     end
-
     # while loop doesn't empty both arys
     result + left + right
   end
