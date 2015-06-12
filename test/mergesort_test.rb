@@ -1,4 +1,4 @@
-require_relative 'spec_helper'
+require_relative './test_helper'
 
 #require 'rspec'
 #require_relative '../src/mergesort'
