@@ -31,6 +31,11 @@ RSpec.describe 'This is a mergesort implementation written in Ruby.' do
       expect(ary.mergesort).to eql([1, 2, 3, 4, 5])
     end
 
+    it 'orders Array objects filled with Fixnum objects (branch coverage)' do
+      ary = [7, 5, 4, 6, 2, 3, 1]
+      expect(ary.mergesort).to eql([1, 2, 3, 4, 5, 6, 7])
+    end
+
     it 'orders from bigger to smaller Array objects filled with Fixnum objects' do
       ary = [1, 2, 3, 4, 5]
       expect(ary.mergesort { |a, b| -(a <=> b) }).to eql([5, 4, 3, 2, 1])
