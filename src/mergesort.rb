@@ -25,9 +25,9 @@ class Array
 
   def merge(left, right, &block)
     result = []
-    (block = -> (a, b) { a <=> b }) unless block_given?
+    block = ->(a, b) { a <=> b } unless block_given?
 
-    while !(left.empty?) && !i(right.empty?)
+    while !(left.empty?) && !(right.empty?)
       if (block.call(left.first, right.first) <= 0)
         result << left.shift # .shift is destructive, .first isn't
       else
