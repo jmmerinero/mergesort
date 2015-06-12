@@ -18,12 +18,12 @@ RSpec.describe 'This is a mergesort implementation written in Ruby.' do
       ary = [4, 3, 2, 1]
       expect(ary.mergesort).to be(ary)
     end
-    
+
     it 'orders Array objects filled with an even number of Fixnum objects' do
       ary = [4, 3, 2, 1]
       expect(ary.mergesort).to eql([1, 2, 3, 4])
     end
-    
+
     it 'orders Array objects filled with an odd number of Fixnum objects' do
       ary = [5, 4, 3, 2, 1]
       expect(ary.mergesort).to eql([1, 2, 3, 4, 5])
@@ -31,20 +31,17 @@ RSpec.describe 'This is a mergesort implementation written in Ruby.' do
 
     it 'orders from bigger to smaller Array objects filled with Fixnum objects' do
       ary = [1, 2, 3, 4, 5]
-      expect(ary.mergesort{|a, b| -(a<=>b)}).to eql([5, 4, 3, 2, 1])
+      expect(ary.mergesort { |a, b| -(a <=> b) }).to eql([5, 4, 3, 2, 1])
     end
 
-
     it 'orders Array objects filled with String objects' do
-      ary = ['d', 'c', 'b', 'a']
-      expect(ary.mergesort).to eql(['a', 'b', 'c', 'd'])
+      ary = %w(d c b a)
+      expect(ary.mergesort).to eql(%w(a b c d))
     end
 
     it 'orders from bigger to smaller Array objects filled with String objects' do
-      ary = ['a', 'b', 'c', 'd']
-      expect(ary.mergesort{|a, b| -(a<=>b)}).to eql(['d', 'c', 'b', 'a'])
+      ary = %w(a b c d)
+      expect(ary.mergesort { |a, b| -(a <=> b) }).to eql(%w(d c b a))
     end
   end
 end
-
-
